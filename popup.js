@@ -43,14 +43,19 @@ function scrapeSenderAddresses() {
     
     // RegEx to parse emails from html code
     const emailRegEx = /\bzF" email="\b[\w\.=-]+@[\w\.-]+\.[\w]{2,3}/gim
-    // /[\w\.=-]+@[\w\.-]+\.[\w]{2,3}/gim
-    // zF" email="someEmail
-    // \bzF" email=\b[\w\.=-]+@[\w\.-]+\.[\w]{2,3}
+    // email regEx format: /[\w\.=-]+@[\w\.-]+\.[\w]{2,3}/gim
 
     // Parse emails from the HTML 
-    let emails = document.body.innerHTML.match
+    let unfilteredEmails = document.body.innerHTML.match
     (emailRegEx);
-    alert(emails);
+
+    // RegEx to parse emails from html code
+
+    for(var i = 0; i < unfilteredEmails.length; i++) {
+        unfilteredEmails[i] = unfilteredEmails[i].substr(unfilteredEmails[i].indexOf("zF\" email=\"") + 11, unfilteredEmails[i].length - 1);
+    }
+
+    let emails = unfilteredEmails;
 
     // Send emails to popup
     chrome.runtime.sendMessage({emails});
