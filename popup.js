@@ -21,9 +21,9 @@ chrome.runtime.onMessage.addListener((request,
                 let li = document.createElement('li');
                 li.innerText = email;
                 list.appendChild(li);
-            })
+            });
         }
-})
+});
 
 scrapeEmails.addEventListener("click", async () => {
 
@@ -42,12 +42,13 @@ scrapeEmails.addEventListener("click", async () => {
 function scrapeSenderAddresses() {
     
     // RegEx to parse emails from html code
-    const emailRegEx = /[\w.=-]+@[\w\.-]+\.[w]{2,3}/
-    gim;
+    const emailRegEx = /^Boilermake{2,3}$/gim;
+    // /[\w\.=-]+@[\w\.-]+\.[\w]{2,3}/
 
-    // Parse emails from the HTML
+    // Parse emails from the HTML 
     let emails = document.body.innerHTML.match
-    {emailRegEx};
+    (emailRegEx);
+    alert(emails);
 
     // Send emails to popup
     chrome.runtime.sendMessage({emails});
