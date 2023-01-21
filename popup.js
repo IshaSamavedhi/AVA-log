@@ -42,8 +42,10 @@ scrapeEmails.addEventListener("click", async () => {
 function scrapeSenderAddresses() {
     
     // RegEx to parse emails from html code
-    const emailRegEx = /^Boilermake{2,3}$/gim;
-    // /[\w\.=-]+@[\w\.-]+\.[\w]{2,3}/
+    const emailRegEx = /\bzF" email="\b[\w\.=-]+@[\w\.-]+\.[\w]{2,3}/gim
+    // /[\w\.=-]+@[\w\.-]+\.[\w]{2,3}/gim
+    // zF" email="someEmail
+    // \bzF" email=\b[\w\.=-]+@[\w\.-]+\.[\w]{2,3}
 
     // Parse emails from the HTML 
     let emails = document.body.innerHTML.match
